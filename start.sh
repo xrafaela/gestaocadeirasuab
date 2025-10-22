@@ -181,20 +181,39 @@ FRONTEND_URL="http://localhost:5000"
 echo "🌐 Abrindo aplicação no navegador..."
 echo "   URL: $FRONTEND_URL"
 
-# Abrir apenas uma aba com localhost
-if command -v xdg-open > /dev/null; then
-    xdg-open "$FRONTEND_URL" 2>/dev/null
+# Abrir apenas uma aba com localhost (sem background)
+BROWSER_OPENED=false
+
+# Tentar firefox primeiro (mais confiável)
+if command -v firefox > /dev/null && [ "$BROWSER_OPENED" = false ]; then
+    firefox "$FRONTEND_URL" > /dev/null 2>&1 &
+    BROWSER_OPENED=true
     sleep 2
-elif command -v firefox > /dev/null; then
-    firefox "$FRONTEND_URL" 2>/dev/null &
+fi
+
+# Se firefox não funcionou, tentar google-chrome
+if [ "$BROWSER_OPENED" = false ] && command -v google-chrome > /dev/null; then
+    google-chrome "$FRONTEND_URL" > /dev/null 2>&1 &
+    BROWSER_OPENED=true
     sleep 2
-elif command -v google-chrome > /dev/null; then
-    google-chrome "$FRONTEND_URL" 2>/dev/null &
+fi
+
+# Se ainda não abriu, tentar chromium
+if [ "$BROWSER_OPENED" = false ] && command -v chromium-browser > /dev/null; then
+    chromium-browser "$FRONTEND_URL" > /dev/null 2>&1 &
+    BROWSER_OPENED=true
     sleep 2
-elif command -v chromium-browser > /dev/null; then
-    chromium-browser "$FRONTEND_URL" 2>/dev/null &
+fi
+
+# Se ainda não abriu, tentar xdg-open (último recurso)
+if [ "$BROWSER_OPENED" = false ] && command -v xdg-open > /dev/null; then
+    xdg-open "$FRONTEND_URL" > /dev/null 2>&1 &
+    BROWSER_OPENED=true
     sleep 2
-else
+fi
+
+# Se nenhum navegador foi aberto
+if [ "$BROWSER_OPENED" = false ]; then
     echo "⚠️  Navegador não detectado automaticamente"
     echo "   Abra manualmente: $FRONTEND_URL"
 fi
