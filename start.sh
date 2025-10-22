@@ -176,45 +176,27 @@ echo ""
 echo "🌐 Preparando frontend..."
 
 # Abrir frontend no navegador (apenas uma vez)
-FRONTEND_PATH="file://$(pwd)/frontend/index.html"
+FRONTEND_URL="http://localhost:5000"
 
 echo "🌐 Abrindo aplicação no navegador..."
+echo "   URL: $FRONTEND_URL"
 
-# Verificar se há navegador aberto e abrir apenas uma aba
-BROWSER_OPENED=false
-
-# Tentar abrir com xdg-open (Linux)
+# Abrir apenas uma aba com localhost
 if command -v xdg-open > /dev/null; then
-    xdg-open "$FRONTEND_PATH" 2>/dev/null &
-    BROWSER_OPENED=true
-    sleep 3
-fi
-
-# Se xdg-open não funcionou, tentar firefox
-if [ "$BROWSER_OPENED" = false ] && command -v firefox > /dev/null; then
-    firefox "$FRONTEND_PATH" 2>/dev/null &
-    BROWSER_OPENED=true
-    sleep 3
-fi
-
-# Se ainda não abriu, tentar google-chrome
-if [ "$BROWSER_OPENED" = false ] && command -v google-chrome > /dev/null; then
-    google-chrome "$FRONTEND_PATH" 2>/dev/null &
-    BROWSER_OPENED=true
-    sleep 3
-fi
-
-# Se ainda não abriu, tentar chromium
-if [ "$BROWSER_OPENED" = false ] && command -v chromium-browser > /dev/null; then
-    chromium-browser "$FRONTEND_PATH" 2>/dev/null &
-    BROWSER_OPENED=true
-    sleep 3
-fi
-
-# Se nenhum navegador foi aberto
-if [ "$BROWSER_OPENED" = false ]; then
+    xdg-open "$FRONTEND_URL" 2>/dev/null
+    sleep 2
+elif command -v firefox > /dev/null; then
+    firefox "$FRONTEND_URL" 2>/dev/null &
+    sleep 2
+elif command -v google-chrome > /dev/null; then
+    google-chrome "$FRONTEND_URL" 2>/dev/null &
+    sleep 2
+elif command -v chromium-browser > /dev/null; then
+    chromium-browser "$FRONTEND_URL" 2>/dev/null &
+    sleep 2
+else
     echo "⚠️  Navegador não detectado automaticamente"
-    echo "   Abra manualmente: $FRONTEND_PATH"
+    echo "   Abra manualmente: $FRONTEND_URL"
 fi
 
 # Informações finais
