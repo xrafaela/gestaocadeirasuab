@@ -26,13 +26,23 @@ function initSetupWizard() {
     const userConfig = localStorage.getItem('userConfig');
     const setupCompleto = localStorage.getItem('setupCompleto');
 
+    console.log('🔍 Verificando setup wizard:');
+    console.log('   userConfig:', userConfig ? 'SIM' : 'NÃO');
+    console.log('   setupCompleto:', setupCompleto ? 'SIM' : 'NÃO');
+
     // Mostrar wizard apenas se não houver dados gravados
     if (!userConfig && !setupCompleto) {
+        console.log('✅ Mostrando setup wizard (primeiro usuário)');
         setupWizard.style.display = 'flex';
+        setupWizard.style.visibility = 'visible';
+        setupWizard.style.opacity = '1';
         carregarDisciplinasParaSetup();
     } else {
         // Usuário já tem dados, esconder wizard
+        console.log('⏭️  Setup wizard oculto (usuário já ativo)');
         setupWizard.style.display = 'none';
+        setupWizard.style.visibility = 'hidden';
+        setupWizard.style.opacity = '0';
     }
 }
 
@@ -201,15 +211,24 @@ async function finalizarSetup() {
         dataSetup: new Date().toISOString()
     };
 
+    console.log('💾 Salvando configuração do usuário:', config);
     localStorage.setItem('userConfig', JSON.stringify(config));
     localStorage.setItem('setupCompleto', 'true');
 
     // Fechar wizard
     const setupWizard = document.getElementById('setup-wizard');
     setupWizard.style.display = 'none';
+    setupWizard.style.visibility = 'hidden';
+    setupWizard.style.opacity = '0';
 
-    // Recarregar página
-    showToast('✅ Setup concluído! Bem-vindo ao Study Planner!', 'success');
+    // Mostrar mensagem de sucesso
+    if (typeof showToast === 'function') {
+        showToast('✅ Setup concluído! Bem-vindo ao Study Planner!', 'success');
+    } else {
+        alert('✅ Setup concluído! Bem-vindo ao Study Planner!');
+    }
+
+    // Recarregar página após 1.5 segundos
     setTimeout(() => {
         location.reload();
     }, 1500);
@@ -223,8 +242,25 @@ function getUserConfig() {
 
 // Resetar setup (para testes)
 function resetSetup() {
+    console.log('🔄 Resetando setup wizard...');
     localStorage.removeItem('setupCompleto');
     localStorage.removeItem('userConfig');
+    console.log('✅ Setup resetado. Recarregando página...');
     location.reload();
+}
+
+// Função para verificar status do setup (debug)
+function checkSetupStatus() {
+    const userConfig = localStorage.getItem('userConfig');
+    const setupCompleto = localStorage.getItem('setupCompleto');
+
+    console.log('📊 Status do Setup:');
+    console.log('   setupCompleto:', setupCompleto);
+    console.log('   userConfig:', userConfig ? JSON.parse(userConfig) : null);
+
+    return {
+        setupCompleto: !!setupCompleto,
+        userConfig: userConfig ? JSON.parse(userConfig) : null
+    };
 }
 

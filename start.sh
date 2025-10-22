@@ -180,11 +180,39 @@ FRONTEND_PATH="file://$(pwd)/frontend/index.html"
 
 echo "🌐 Abrindo aplicação no navegador..."
 
-# Usar apenas xdg-open para evitar abrir múltiplas janelas
+# Verificar se há navegador aberto e abrir apenas uma aba
+BROWSER_OPENED=false
+
+# Tentar abrir com xdg-open (Linux)
 if command -v xdg-open > /dev/null; then
-    xdg-open "$FRONTEND_PATH" 2>/dev/null
-    sleep 2
-else
+    xdg-open "$FRONTEND_PATH" 2>/dev/null &
+    BROWSER_OPENED=true
+    sleep 3
+fi
+
+# Se xdg-open não funcionou, tentar firefox
+if [ "$BROWSER_OPENED" = false ] && command -v firefox > /dev/null; then
+    firefox "$FRONTEND_PATH" 2>/dev/null &
+    BROWSER_OPENED=true
+    sleep 3
+fi
+
+# Se ainda não abriu, tentar google-chrome
+if [ "$BROWSER_OPENED" = false ] && command -v google-chrome > /dev/null; then
+    google-chrome "$FRONTEND_PATH" 2>/dev/null &
+    BROWSER_OPENED=true
+    sleep 3
+fi
+
+# Se ainda não abriu, tentar chromium
+if [ "$BROWSER_OPENED" = false ] && command -v chromium-browser > /dev/null; then
+    chromium-browser "$FRONTEND_PATH" 2>/dev/null &
+    BROWSER_OPENED=true
+    sleep 3
+fi
+
+# Se nenhum navegador foi aberto
+if [ "$BROWSER_OPENED" = false ]; then
     echo "⚠️  Navegador não detectado automaticamente"
     echo "   Abra manualmente: $FRONTEND_PATH"
 fi
