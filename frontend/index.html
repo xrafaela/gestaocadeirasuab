@@ -2361,19 +2361,27 @@
         <!-- Setup Wizard Scripts -->
         <script src="setup-wizard.js"></script>
         <script>
-            // Carregar setup wizard quando o DOM estiver pronto
-            document.addEventListener('DOMContentLoaded', () => {
-                // Verificar se é um novo usuário ANTES de carregar o HTML
+            // Função para verificar se é novo usuário
+            function isNewUser() {
                 const userConfig = localStorage.getItem('userConfig');
                 const setupCompleto = localStorage.getItem('setupCompleto');
 
-                console.log('🔍 Verificando novo usuário:');
-                console.log('   userConfig:', userConfig ? 'SIM' : 'NÃO');
-                console.log('   setupCompleto:', setupCompleto ? 'SIM' : 'NÃO');
+                console.log('🔍 Verificando status do usuário:');
+                console.log('   localStorage.userConfig:', userConfig ? 'EXISTE' : 'NÃO EXISTE');
+                console.log('   localStorage.setupCompleto:', setupCompleto ? 'EXISTE' : 'NÃO EXISTE');
 
-                // Carregar setup wizard APENAS se for novo usuário
-                if (!userConfig && !setupCompleto) {
-                    console.log('✅ Novo usuário detectado - Carregando setup wizard');
+                // É novo usuário se AMBOS não existirem
+                const isNew = !userConfig && !setupCompleto;
+                console.log('   Resultado:', isNew ? '🆕 NOVO USUÁRIO' : '✅ USUÁRIO ATIVO');
+
+                return isNew;
+            }
+
+            // Carregar setup wizard quando o DOM estiver pronto
+            document.addEventListener('DOMContentLoaded', () => {
+                // Verificar se é um novo usuário ANTES de carregar o HTML
+                if (isNewUser()) {
+                    console.log('📥 Carregando setup wizard para novo usuário...');
                     fetch('setup-wizard.html')
                         .then(response => response.text())
                         .then(html => {
@@ -2381,11 +2389,34 @@
                             // Inicializar setup wizard após carregar o HTML
                             setTimeout(initSetupWizard, 100);
                         })
-                        .catch(error => console.error('Erro ao carregar setup wizard:', error));
+                        .catch(error => console.error('❌ Erro ao carregar setup wizard:', error));
                 } else {
-                    console.log('⏭️  Usuário já ativo - Setup wizard não será carregado');
+                    console.log('⏭️  Usuário já ativo - Setup wizard NÃO será carregado');
+                    // Garantir que o container está vazio
+                    const container = document.getElementById('setup-wizard-container');
+                    if (container) {
+                        container.innerHTML = '';
+                        container.style.display = 'none';
+                    }
                 }
             });
+
+            // Função global para marcar setup como completo (para debug)
+            window.markSetupComplete = function() {
+                const config = {
+                    nome: 'Usuário',
+                    curso: 'LEI',
+                    ano: '1',
+                    disciplinas: [],
+                    horasDia: 3,
+                    diasEstudo: ['segunda', 'terca', 'quarta', 'quinta', 'sexta'],
+                    dataSetup: new Date().toISOString()
+                };
+                localStorage.setItem('userConfig', JSON.stringify(config));
+                localStorage.setItem('setupCompleto', 'true');
+                console.log('✅ Setup marcado como completo!');
+                alert('Setup marcado como completo! Recarregue a página.');
+            };
         </script>
     </body>
 </html>

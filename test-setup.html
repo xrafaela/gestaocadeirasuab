@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Setup Status</title>
+</head>
+<body>
+    <h1>Setup Status Test</h1>
+    <div id="status"></div>
+    <button onclick="checkStatus()">Check Status</button>
+    <button onclick="clearSetup()">Clear Setup (Reset)</button>
+    <button onclick="setSetupComplete()">Mark Setup Complete</button>
+    
+    <script>
+        function checkStatus() {
+            const userConfig = localStorage.getItem('userConfig');
+            const setupCompleto = localStorage.getItem('setupCompleto');
+            
+            document.getElementById('status').innerHTML = `
+                <h2>Current Status:</h2>
+                <p><strong>userConfig:</strong> ${userConfig ? 'EXISTS' : 'NOT FOUND'}</p>
+                <p><strong>setupCompleto:</strong> ${setupCompleto ? 'EXISTS' : 'NOT FOUND'}</p>
+                <hr>
+                <p><strong>userConfig value:</strong></p>
+                <pre>${userConfig || 'null'}</pre>
+                <p><strong>setupCompleto value:</strong></p>
+                <pre>${setupCompleto || 'null'}</pre>
+            `;
+        }
+        
+        function clearSetup() {
+            localStorage.removeItem('userConfig');
+            localStorage.removeItem('setupCompleto');
+            alert('Setup cleared! Reload the page to see setup wizard.');
+            checkStatus();
+        }
+        
+        function setSetupComplete() {
+            const config = {
+                nome: 'Usuário Teste',
+                curso: 'LEI',
+                ano: '1',
+                disciplinas: [],
+                horasDia: 3,
+                diasEstudo: ['segunda', 'terca', 'quarta', 'quinta', 'sexta'],
+                dataSetup: new Date().toISOString()
+            };
+            localStorage.setItem('userConfig', JSON.stringify(config));
+            localStorage.setItem('setupCompleto', 'true');
+            alert('Setup marked as complete! Reload the page.');
+            checkStatus();
+        }
+        
+        // Auto check on load
+        window.onload = checkStatus;
+    </script>
+</body>
+</html>
