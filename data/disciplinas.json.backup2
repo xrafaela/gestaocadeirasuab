@@ -1,0 +1,1036 @@
+{
+  "semestre": "2º ano - 1º semestre",
+  "ano_letivo": "2025/2026",
+  "disciplinas": [
+    {
+      "id": "21053",
+      "nome": "Fundamentos de Bases de Dados",
+      "sigla": "FBD",
+      "cor": "#FF6B6B",
+      "ano": "2º ano",
+      "tipo": "multi",
+      "creditos": 6,
+      "sessoes_sincronas": [],
+      "e_folios": [
+        {
+          "tipo": "e-fólio A",
+          "semana": 8,
+          "data": "24 novembro",
+          "peso": 40
+        },
+        {
+          "tipo": "e-fólio B",
+          "semana": 13,
+          "data": "12 janeiro",
+          "peso": 60
+        }
+      ],
+      "prova_final": {
+        "epoca_normal": "02-02-2027",
+        "epoca_recurso": "13-07-2027"
+      },
+      "topicos": [
+        {
+          "numero": 1,
+          "titulo": "Introdução a Bases de Dados",
+          "semanas": [
+            1,
+            2
+          ],
+          "carga_horaria": 6
+        },
+        {
+          "numero": 2,
+          "titulo": "Modelo Relacional",
+          "semanas": [
+            3,
+            4
+          ],
+          "carga_horaria": 8
+        },
+        {
+          "numero": 3,
+          "titulo": "SQL - Queries Básicas",
+          "semanas": [
+            5,
+            6,
+            7
+          ],
+          "carga_horaria": 10
+        },
+        {
+          "numero": 4,
+          "titulo": "SQL - Queries Avançadas",
+          "semanas": [
+            8,
+            9
+          ],
+          "carga_horaria": 8
+        },
+        {
+          "numero": 5,
+          "titulo": "Normalização",
+          "semanas": [
+            10,
+            11,
+            12
+          ],
+          "carga_horaria": 10
+        },
+        {
+          "numero": 6,
+          "titulo": "Transações e Concorrência",
+          "semanas": [
+            13,
+            14
+          ],
+          "carga_horaria": 6
+        }
+      ],
+      "materiais": [
+        "plano da unidade curricular.pdf"
+      ],
+      "plano_trabalho": {
+        "semanas": [
+          {
+            "numero": 1,
+            "data": "06 de outubro de 2025",
+            "topico": "Introdução e SQL",
+            "topico_numero": 1,
+            "atividades": "Apresentação e leitura PUC."
+          },
+          {
+            "numero": 2,
+            "data": "13 de outubro de 2025",
+            "topico": "Introdução e SQL",
+            "topico_numero": 1,
+            "atividades": "Leitura Capítulo 1. Realizar Atividade Formativa: Introdução"
+          },
+          {
+            "numero": 3,
+            "data": "20 de outubro de 2025",
+            "topico": "Introdução e SQL",
+            "topico_numero": 1,
+            "atividades": "Leitura Capítulo 2. Atividade Formativa. \"Decisão sobre a Avaliação\""
+          },
+          {
+            "numero": 4,
+            "data": "27 de outubro de 2025",
+            "topico": "Introdução e SQL",
+            "topico_numero": 1,
+            "atividades": "Leitura Capítulo 3. Atividade Formativa: operador select"
+          },
+          {
+            "numero": 5,
+            "data": "03 de novembro de 2025",
+            "topico": "Introdução e SQL",
+            "topico_numero": 1,
+            "atividades": "Cont. Capítulo 3. Atividade Formativa: funções agregadas"
+          },
+          {
+            "numero": 6,
+            "data": "10 de novembro de 2025",
+            "topico": "Introdução e SQL",
+            "topico_numero": 1,
+            "atividades": "Cont. Capítulo 3. Atividade Formativa: insert, update, delete"
+          },
+          {
+            "numero": 7,
+            "data": "17 de novembro de 2025",
+            "topico": "Introdução e SQL",
+            "topico_numero": 1,
+            "atividades": "e-fólio A"
+          },
+          {
+            "numero": 8,
+            "data": "24 de novembro de 2025",
+            "topico": "Introdução e SQL",
+            "topico_numero": 1,
+            "atividades": "Leitura Capítulo 4, 5. Atividade Formativa: Integridade e gatilhos10/10/2025, 20:21 Plano da Unidade Curricular | PlataformAbERTA"
+          },
+          {
+            "numero": 9,
+            "data": "01 de dezembro de 2025",
+            "topico": "Modelo Relacional e Desenho DB",
+            "topico_numero": 2,
+            "atividades": "Leitura Capítulo 6. Atividade Formativa: Algebra Relacional"
+          },
+          {
+            "numero": 10,
+            "data": "08 de dezembro de 2025",
+            "topico": "Modelo Relacional e Desenho DB",
+            "topico_numero": 2,
+            "atividades": "Leitura Capítulo 7. Realizar a Atividade Formativa: ER"
+          },
+          {
+            "numero": 11,
+            "data": "15 de dezembro de 2025",
+            "topico": "Modelo Relacional e Desenho DB",
+            "topico_numero": 2,
+            "atividades": "Continuação Capítulo 7. Atividade Formativa"
+          },
+          {
+            "numero": 12,
+            "data": "05 de janeiro de 2026",
+            "topico": "Modelo Relacional e Desenho DB",
+            "topico_numero": 2,
+            "atividades": "Leitura Capítulo 8. Atividade Formativa: FN"
+          },
+          {
+            "numero": 13,
+            "data": "12 de janeiro de 2026",
+            "topico": "Modelo Relacional e Desenho DB",
+            "topico_numero": 2,
+            "atividades": "e-fólio B"
+          },
+          {
+            "numero": 14,
+            "data": "19 de janeiro de 2026",
+            "topico": "Modelo Relacional e Desenho DB",
+            "topico_numero": 2,
+            "atividades": "Continuação Capítulo 8. Atividade Formativa10/10/2025, 20:21 Plano da Unidade Curricular | PlataformAbERTA"
+          }
+        ],
+        "topicos_detalhados": []
+      }
+    },
+    {
+      "id": "21078",
+      "nome": "Linguagens e Computação",
+      "sigla": "LC",
+      "cor": "#4ECDC4",
+      "ano": "2º ano",
+      "tipo": "assign",
+      "creditos": 6,
+      "sessoes_sincronas": [],
+      "e_folios": [
+        {
+          "tipo": "e-fólio A (parte 1)",
+          "semana": 9,
+          "data": "1 dezembro",
+          "peso": 20
+        },
+        {
+          "tipo": "e-fólio A (parte 2)",
+          "semana": 10,
+          "data": "8 dezembro",
+          "peso": 20
+        },
+        {
+          "tipo": "e-fólio B (parte 1)",
+          "semana": 12,
+          "data": "5 janeiro",
+          "peso": 30
+        },
+        {
+          "tipo": "e-fólio B (parte 2)",
+          "semana": 13,
+          "data": "12 janeiro",
+          "peso": 30
+        }
+      ],
+      "prova_final": {
+        "epoca_normal": "20-02-2027",
+        "epoca_recurso": "22-07-2027"
+      },
+      "topicos": [
+        {
+          "numero": 1,
+          "titulo": "Linguagens Formais",
+          "semanas": [
+            1,
+            2,
+            3
+          ],
+          "carga_horaria": 9
+        },
+        {
+          "numero": 2,
+          "titulo": "Autómatos Finitos",
+          "semanas": [
+            4,
+            5,
+            6
+          ],
+          "carga_horaria": 9
+        },
+        {
+          "numero": 3,
+          "titulo": "Gramáticas Livres de Contexto",
+          "semanas": [
+            7,
+            8,
+            9
+          ],
+          "carga_horaria": 10
+        },
+        {
+          "numero": 4,
+          "titulo": "Máquinas de Turing",
+          "semanas": [
+            10,
+            11
+          ],
+          "carga_horaria": 8
+        },
+        {
+          "numero": 5,
+          "titulo": "Computabilidade",
+          "semanas": [
+            12,
+            13,
+            14
+          ],
+          "carga_horaria": 10
+        }
+      ],
+      "materiais": [
+        "Plano da Unidade Curricular _ PlataformAbERTA.pdf"
+      ]
+    },
+    {
+      "id": "21093",
+      "nome": "Programação por Objetos",
+      "sigla": "PO",
+      "cor": "#95E1D3",
+      "ano": "2º ano",
+      "tipo": "projeto",
+      "creditos": 6,
+      "sessoes_sincronas": [
+        {
+          "data": "6 outubro",
+          "semana": 1,
+          "dia_semana": "Segunda",
+          "horario": "22:00"
+        }
+      ],
+      "e_folios": [
+        {
+          "tipo": "e-fólio A (Projeto)",
+          "semana": 4,
+          "descricao": "Atividades de projeto - AF3.1 (Definição + Storyboard + Mockups)",
+          "data_inicio": "27 outubro",
+          "peso": 40
+        },
+        {
+          "tipo": "e-fólio A (Entrega)",
+          "semana": 6,
+          "data": "10 novembro",
+          "peso": 40
+        },
+        {
+          "tipo": "e-fólio B (Projeto)",
+          "semana": 10,
+          "descricao": "Atividades de projeto - Continuação",
+          "data": "8 dezembro",
+          "peso": 60
+        }
+      ],
+      "prova_final": {
+        "epoca_normal": "10-02-2027",
+        "epoca_recurso": "24-07-2027"
+      },
+      "topicos": [
+        {
+          "numero": 1,
+          "titulo": "Introdução à POO",
+          "semanas": [
+            1
+          ],
+          "carga_horaria": 3,
+          "atividades": [
+            "Atividade 1: Preparação para programar em Python",
+            "Atividade 1a: Preparação para uso de LLMs"
+          ]
+        },
+        {
+          "numero": 2,
+          "titulo": "Ambientação à linguagem + problemas da OO",
+          "semanas": [
+            2,
+            3
+          ],
+          "carga_horaria": 8,
+          "atividades": [
+            "AF2: Implementar programa Python",
+            "Participação ativa no Fórum do Tópico 2"
+          ]
+        },
+        {
+          "numero": 3,
+          "titulo": "Projeto - Definição e Design",
+          "semanas": [
+            4,
+            5,
+            6
+          ],
+          "carga_horaria": 12,
+          "atividades": [
+            "AF3.1: Definição Projeto + Storyboard + Mockups (com IA)",
+            "AF3.2: Protótipos Python",
+            "Entrega e-fólio A"
+          ]
+        },
+        {
+          "numero": 4,
+          "titulo": "Classes e Objetos",
+          "semanas": [
+            7,
+            8,
+            9
+          ],
+          "carga_horaria": 10
+        },
+        {
+          "numero": 5,
+          "titulo": "Herança e Polimorfismo",
+          "semanas": [
+            10,
+            11
+          ],
+          "carga_horaria": 8,
+          "atividades": [
+            "Desenvolvimento do projeto final",
+            "Entrega e-fólio B"
+          ]
+        },
+        {
+          "numero": 6,
+          "titulo": "Padrões de Design",
+          "semanas": [
+            12,
+            13,
+            14
+          ],
+          "carga_horaria": 10
+        }
+      ],
+      "materiais": [
+        "Plano da Unidade Curricular _ PlataformAbERTA.pdf",
+        "OOP_topico1.pdf",
+        "Atividade Formativa 1.docx"
+      ],
+      "horas_semanais_recomendadas": 5,
+      "plano_trabalho": {
+        "semanas": [
+          {
+            "numero": 1,
+            "data": "06 de outubro de 2025",
+            "topico": "Introdução à POO",
+            "topico_numero": 1,
+            "atividades": "Atividade 1: Preparação para programar em Python. Atividade 1a: Preparação para uso de LLMs. Sessão Síncrona às 22:00"
+          },
+          {
+            "numero": 2,
+            "data": "13 de outubro de 2025",
+            "topico": "Ambientação à linguagem + problemas da OO",
+            "topico_numero": 2,
+            "atividades": "AF2: Implementar programa Python. Participação ativa no Fórum do Tópico 2"
+          },
+          {
+            "numero": 3,
+            "data": "20 de outubro de 2025",
+            "topico": "Ambientação à linguagem + problemas da OO",
+            "topico_numero": 2,
+            "atividades": "Continuação AF2. Participação no Fórum"
+          },
+          {
+            "numero": 4,
+            "data": "27 de outubro de 2025",
+            "topico": "Projeto - Definição e Design",
+            "topico_numero": 3,
+            "atividades": "AF3.1: Definição Projeto + Storyboard + Mockups (com IA) - INÍCIO"
+          },
+          {
+            "numero": 5,
+            "data": "03 de novembro de 2025",
+            "topico": "Projeto - Definição e Design",
+            "topico_numero": 3,
+            "atividades": "AF3.2: Protótipos Python"
+          },
+          {
+            "numero": 6,
+            "data": "10 de novembro de 2025",
+            "topico": "Projeto - Definição e Design",
+            "topico_numero": 3,
+            "atividades": "Entrega e-fólio A (Projeto)"
+          },
+          {
+            "numero": 7,
+            "data": "17 de novembro de 2025",
+            "topico": "Classes e Objetos",
+            "topico_numero": 4,
+            "atividades": "Estudo de Classes e Objetos em Python"
+          },
+          {
+            "numero": 8,
+            "data": "24 de novembro de 2025",
+            "topico": "Classes e Objetos",
+            "topico_numero": 4,
+            "atividades": "Continuação: Classes e Objetos"
+          },
+          {
+            "numero": 9,
+            "data": "01 de dezembro de 2025",
+            "topico": "Classes e Objetos",
+            "topico_numero": 4,
+            "atividades": "Aplicação prática de Classes e Objetos"
+          },
+          {
+            "numero": 10,
+            "data": "08 de dezembro de 2025",
+            "topico": "Herança e Polimorfismo",
+            "topico_numero": 5,
+            "atividades": "Desenvolvimento do projeto final. Entrega e-fólio B"
+          },
+          {
+            "numero": 11,
+            "data": "15 de dezembro de 2025",
+            "topico": "Herança e Polimorfismo",
+            "topico_numero": 5,
+            "atividades": "Continuação: Herança e Polimorfismo"
+          },
+          {
+            "numero": 12,
+            "data": "05 de janeiro de 2026",
+            "topico": "Padrões de Design",
+            "topico_numero": 6,
+            "atividades": "Estudo de Padrões de Design"
+          },
+          {
+            "numero": 13,
+            "data": "12 de janeiro de 2026",
+            "topico": "Padrões de Design",
+            "topico_numero": 6,
+            "atividades": "Aplicação de Padrões de Design"
+          },
+          {
+            "numero": 14,
+            "data": "19 de janeiro de 2026",
+            "topico": "Padrões de Design",
+            "topico_numero": 6,
+            "atividades": "Revisão e consolidação"
+          }
+        ]
+      }
+    },
+    {
+      "id": "21106",
+      "nome": "Sistemas em Rede",
+      "sigla": "SR",
+      "cor": "#F38181",
+      "ano": "2º ano",
+      "tipo": "projeto",
+      "creditos": 6,
+      "sessoes_sincronas": [
+        {
+          "data": "29 outubro",
+          "semana": 4,
+          "dia_semana": "Terça",
+          "horario": "21:30",
+          "numero": "SS 3ª 4"
+        },
+        {
+          "data": "3 dezembro",
+          "semana": 9,
+          "dia_semana": "Terça",
+          "horario": "21:30",
+          "numero": "SS 3ª 9"
+        },
+        {
+          "data": "14 janeiro",
+          "semana": 13,
+          "dia_semana": "Terça",
+          "horario": "21:30",
+          "numero": "SS 3ª 13"
+        }
+      ],
+      "e_folios": [
+        {
+          "tipo": "e-fólio A",
+          "semana": 6,
+          "data": "10 novembro",
+          "peso": 40
+        },
+        {
+          "tipo": "e-fólio B",
+          "semana": 10,
+          "data": "8 dezembro",
+          "peso": 60
+        }
+      ],
+      "prova_final": {
+        "epoca_normal": "16-02-2027",
+        "epoca_recurso": "08-07-2027"
+      },
+      "topicos": [
+        {
+          "numero": 1,
+          "titulo": "Introdução a Redes",
+          "semanas": [
+            1,
+            2,
+            3
+          ],
+          "carga_horaria": 9
+        },
+        {
+          "numero": 2,
+          "titulo": "Camada de Aplicação",
+          "semanas": [
+            4,
+            5,
+            6
+          ],
+          "carga_horaria": 10
+        },
+        {
+          "numero": 3,
+          "titulo": "Camada de Transporte",
+          "semanas": [
+            7,
+            8
+          ],
+          "carga_horaria": 8
+        },
+        {
+          "numero": 4,
+          "titulo": "Camada de Rede",
+          "semanas": [
+            9,
+            10,
+            11
+          ],
+          "carga_horaria": 10
+        },
+        {
+          "numero": 5,
+          "titulo": "Camada de Enlace",
+          "semanas": [
+            12,
+            13
+          ],
+          "carga_horaria": 8
+        },
+        {
+          "numero": 6,
+          "titulo": "Segurança em Redes",
+          "semanas": [
+            14
+          ],
+          "carga_horaria": 5
+        }
+      ],
+      "materiais": [
+        "Plano da Unidade Curricular _ PlataformAbERTA.pdf",
+        "Redes_1.pdf",
+        "Redes_SS1_Guia_08_out.pdf"
+      ],
+      "plano_trabalho": {
+        "semanas": [
+          {
+            "numero": 1,
+            "data": "06 de outubro de 2025",
+            "topico": "Introdução a Redes",
+            "topico_numero": 1,
+            "atividades": "Introdução aos conceitos de redes de computadores"
+          },
+          {
+            "numero": 2,
+            "data": "13 de outubro de 2025",
+            "topico": "Introdução a Redes",
+            "topico_numero": 1,
+            "atividades": "Arquitetura de redes e protocolos"
+          },
+          {
+            "numero": 3,
+            "data": "20 de outubro de 2025",
+            "topico": "Introdução a Redes",
+            "topico_numero": 1,
+            "atividades": "Modelo OSI e TCP/IP"
+          },
+          {
+            "numero": 4,
+            "data": "27 de outubro de 2025",
+            "topico": "Camada de Aplicação",
+            "topico_numero": 2,
+            "atividades": "Protocolos da camada de aplicação. Sessão Síncrona SS 3ª 4 às 21:30"
+          },
+          {
+            "numero": 5,
+            "data": "03 de novembro de 2025",
+            "topico": "Camada de Aplicação",
+            "topico_numero": 2,
+            "atividades": "HTTP, DNS, FTP"
+          },
+          {
+            "numero": 6,
+            "data": "10 de novembro de 2025",
+            "topico": "Camada de Aplicação",
+            "topico_numero": 2,
+            "atividades": "Entrega e-fólio A"
+          },
+          {
+            "numero": 7,
+            "data": "17 de novembro de 2025",
+            "topico": "Camada de Transporte",
+            "topico_numero": 3,
+            "atividades": "TCP e UDP"
+          },
+          {
+            "numero": 8,
+            "data": "24 de novembro de 2025",
+            "topico": "Camada de Transporte",
+            "topico_numero": 3,
+            "atividades": "Controle de fluxo e congestionamento"
+          },
+          {
+            "numero": 9,
+            "data": "01 de dezembro de 2025",
+            "topico": "Camada de Rede",
+            "topico_numero": 4,
+            "atividades": "Roteamento e endereçamento IP. Sessão Síncrona SS 3ª 9 às 21:30"
+          },
+          {
+            "numero": 10,
+            "data": "08 de dezembro de 2025",
+            "topico": "Camada de Rede",
+            "topico_numero": 4,
+            "atividades": "Entrega e-fólio B"
+          },
+          {
+            "numero": 11,
+            "data": "15 de dezembro de 2025",
+            "topico": "Camada de Rede",
+            "topico_numero": 4,
+            "atividades": "IPv6 e protocolos de roteamento"
+          },
+          {
+            "numero": 12,
+            "data": "05 de janeiro de 2026",
+            "topico": "Camada de Enlace",
+            "topico_numero": 5,
+            "atividades": "Protocolos de enlace e detecção de erros"
+          },
+          {
+            "numero": 13,
+            "data": "12 de janeiro de 2026",
+            "topico": "Camada de Enlace",
+            "topico_numero": 5,
+            "atividades": "Ethernet e switches. Sessão Síncrona SS 3ª 13 às 21:30"
+          },
+          {
+            "numero": 14,
+            "data": "19 de janeiro de 2026",
+            "topico": "Segurança em Redes",
+            "topico_numero": 6,
+            "atividades": "Criptografia e segurança em redes"
+          }
+        ]
+      }
+    },
+    {
+      "id": "21010",
+      "nome": "Arquitetura de Computadores",
+      "sigla": "AC",
+      "cor": "#AA96DA",
+      "ano": "1º ano",
+      "tipo": "regular",
+      "creditos": 6,
+      "sessoes_sincronas": [
+        {
+          "data": "8 outubro",
+          "semana": 1,
+          "dia_semana": "Terça",
+          "horario": "21:00"
+        },
+        {
+          "data": "14 novembro",
+          "semana": 6,
+          "dia_semana": "Quinta",
+          "horario": "21:00"
+        },
+        {
+          "data": "12 dezembro",
+          "semana": 10,
+          "dia_semana": "Quinta",
+          "horario": "21:00"
+        },
+        {
+          "data": "15 janeiro",
+          "semana": 13,
+          "dia_semana": "Quarta",
+          "horario": "21:00"
+        }
+      ],
+      "e_folios": [
+        {
+          "tipo": "e-fólio A",
+          "semana": 5,
+          "data": "3 novembro",
+          "peso": 40
+        },
+        {
+          "tipo": "e-fólio B",
+          "semana": 11,
+          "data": "15 dezembro",
+          "peso": 60
+        }
+      ],
+      "prova_final": {
+        "epoca_normal": "09-02-2027",
+        "epoca_recurso": "09-07-2027"
+      },
+      "materiais": [
+        "Plano da Unidade Curricular _ PlataformAbERTA.pdf",
+        "PVP 1 Capítulo 1 - Representação Digital da Informação.pdf",
+        "caps1-3.pdf"
+      ]
+    },
+    {
+      "id": "21174",
+      "nome": "Sistemas Computacionais",
+      "sigla": "SC",
+      "cor": "#FCBAD3",
+      "ano": "1º ano",
+      "tipo": "regular",
+      "creditos": 6,
+      "sessoes_sincronas": [],
+      "e_folios": [
+        {
+          "tipo": "e-fólio A",
+          "semana": 4,
+          "data": "27 outubro",
+          "peso": 40
+        },
+        {
+          "tipo": "e-fólio B",
+          "semana": 11,
+          "data": "15 dezembro",
+          "peso": 60
+        }
+      ],
+      "prova_final": {
+        "epoca_normal": "27-01-2027",
+        "epoca_recurso": "23-07-2027"
+      },
+      "materiais": [
+        "Plano da Unidade Curricular _ PlataformAbERTA.pdf",
+        "Patterson_Hennessy_ch1.pdf",
+        "apoio1.pptx",
+        "apoio2.pptx",
+        "content.pdf"
+      ]
+    },
+    {
+      "id": "21176",
+      "nome": "Ética e Práticas de Engenharia",
+      "sigla": "EPE",
+      "cor": "#FFFFD2",
+      "ano": "1º ano",
+      "tipo": "continua",
+      "creditos": 3,
+      "sessoes_sincronas": [],
+      "avaliacoes": [
+        {
+          "tipo": "Avaliação Contínua - Módulo 1",
+          "semana": 1,
+          "peso": 25
+        },
+        {
+          "tipo": "Avaliação Contínua - Módulo 2",
+          "semana": 5,
+          "peso": 25
+        },
+        {
+          "tipo": "Avaliação Contínua - Módulo 3",
+          "semana": 9,
+          "peso": 25
+        },
+        {
+          "tipo": "Módulo 4",
+          "semana": 12,
+          "peso": 25
+        }
+      ],
+      "prova_final": {
+        "epoca_recurso": "15-07-2027"
+      }
+    }
+  ],
+  "calendario_semanal": {
+    "segunda": {
+      "horario": "19:00-22:00",
+      "distribuicao": [
+        {
+          "disciplina": "AC",
+          "inicio": "19:00",
+          "fim": "20:00"
+        },
+        {
+          "tipo": "pausa",
+          "inicio": "20:00",
+          "fim": "20:30"
+        },
+        {
+          "disciplina": "SC",
+          "inicio": "20:30",
+          "fim": "21:30"
+        },
+        {
+          "disciplina": "EPE",
+          "inicio": "21:30",
+          "fim": "22:00"
+        }
+      ]
+    },
+    "terca": {
+      "horario": "19:00-22:00",
+      "distribuicao": [
+        {
+          "disciplina": "FBD",
+          "inicio": "19:00",
+          "fim": "20:00"
+        },
+        {
+          "tipo": "pausa",
+          "inicio": "20:00",
+          "fim": "20:30"
+        },
+        {
+          "disciplina": "LC",
+          "inicio": "20:30",
+          "fim": "21:30"
+        },
+        {
+          "disciplina": "PO",
+          "inicio": "21:30",
+          "fim": "22:00"
+        }
+      ]
+    },
+    "quarta": {
+      "horario": "19:00-22:00",
+      "distribuicao": [
+        {
+          "disciplina": "AC",
+          "inicio": "19:00",
+          "fim": "20:00"
+        },
+        {
+          "tipo": "pausa",
+          "inicio": "20:00",
+          "fim": "20:30"
+        },
+        {
+          "disciplina": "PO",
+          "inicio": "20:30",
+          "fim": "21:30"
+        },
+        {
+          "disciplina": "EPE",
+          "inicio": "21:30",
+          "fim": "22:00"
+        }
+      ]
+    },
+    "quinta": {
+      "horario": "19:00-22:00",
+      "distribuicao": [
+        {
+          "disciplina": "SR",
+          "inicio": "19:00",
+          "fim": "20:00"
+        },
+        {
+          "tipo": "pausa",
+          "inicio": "20:00",
+          "fim": "20:30"
+        },
+        {
+          "disciplina": "FBD",
+          "inicio": "20:30",
+          "fim": "21:30"
+        },
+        {
+          "disciplina": "LC",
+          "inicio": "21:30",
+          "fim": "22:00"
+        }
+      ]
+    },
+    "sexta": {
+      "horario": "19:00-22:00",
+      "distribuicao": [
+        {
+          "disciplina": "PO",
+          "inicio": "19:00",
+          "fim": "20:00"
+        },
+        {
+          "tipo": "pausa",
+          "inicio": "20:00",
+          "fim": "20:30"
+        },
+        {
+          "disciplina": "SC",
+          "inicio": "20:30",
+          "fim": "21:30"
+        },
+        {
+          "disciplina": "AC",
+          "inicio": "21:30",
+          "fim": "22:00"
+        }
+      ]
+    },
+    "sabado": {
+      "horario": "07:00-10:30",
+      "distribuicao": [
+        {
+          "disciplina": "PO",
+          "inicio": "07:00",
+          "fim": "09:00",
+          "tipo": "projeto"
+        },
+        {
+          "tipo": "pausa",
+          "inicio": "09:00",
+          "fim": "09:30"
+        },
+        {
+          "disciplina": "SR",
+          "inicio": "09:30",
+          "fim": "10:30"
+        }
+      ]
+    },
+    "domingo": {
+      "horario": "07:00-10:30",
+      "distribuicao": [
+        {
+          "disciplina": "PO",
+          "inicio": "07:00",
+          "fim": "07:30"
+        },
+        {
+          "disciplina": "REVISAO",
+          "inicio": "07:30",
+          "fim": "09:00"
+        },
+        {
+          "tipo": "pausa",
+          "inicio": "09:00",
+          "fim": "09:30"
+        },
+        {
+          "disciplina": "E_FOLIOS",
+          "inicio": "09:30",
+          "fim": "10:30"
+        }
+      ]
+    }
+  },
+  "horas_totais_semana": 21,
+  "meta_diaria": 3
+}

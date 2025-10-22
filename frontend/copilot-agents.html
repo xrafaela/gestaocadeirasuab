@@ -1,0 +1,64 @@
+<!-- Conteúdo: Agentes IA Copilot Studio -->
+<div class="page-header">
+    <h1><i class="fas fa-robot"></i> Agentes IA por Disciplina</h1>
+    <p class="subtitle">Assistentes especializados para cada disciplina</p>
+</div>
+
+<!-- Container Principal -->
+<div class="agents-container">
+    <!-- Menu de Agentes (Esquerda) -->
+    <div class="agents-menu">
+        <h3><i class="fas fa-list"></i> Disciplinas</h3>
+        <div id="agents-list" class="agents-list">
+            <!-- Preenchido dinamicamente -->
+        </div>
+    </div>
+
+    <!-- Chat com Agente (Centro) -->
+    <div class="agent-chat">
+        <!-- Header do Agente -->
+        <div id="agent-header" class="agent-header">
+            <div class="header-content">
+                <h2 id="agent-title">Selecione um agente</h2>
+                <p id="agent-subtitle">Clique em uma disciplina para começar</p>
+            </div>
+            <div class="header-actions">
+                <button id="clear-btn" class="btn btn-sm btn-secondary" style="display:none;">
+                    <i class="fas fa-trash"></i> Limpar
+                </button>
+            </div>
+        </div>
+
+        <!-- Histórico de Mensagens -->
+        <div id="chat-messages" class="chat-messages">
+            <div class="welcome-message">
+                <i class="fas fa-robot"></i>
+                <p>Selecione uma disciplina para começar a conversar com o agente especializado</p>
+            </div>
+        </div>
+
+        <!-- Input de Mensagem -->
+        <div class="chat-input-area">
+            <form id="chat-form" onsubmit="sendMessage(event)">
+                <input 
+                    type="text" 
+                    id="chat-input" 
+                    placeholder="Digite sua pergunta..."
+                    disabled
+                >
+                <button type="submit" id="send-btn" class="btn btn-primary" disabled>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tópicos Recentes (Direita) -->
+    <div class="agent-sidebar">
+        <h4><i class="fas fa-history"></i> Tópicos Recentes</h4>
+        <div id="topics-list" class="topics-list">
+            <p class="empty-state">Nenhum tópico ainda</p>
+        </div>
+    </div>
+</div>
+
