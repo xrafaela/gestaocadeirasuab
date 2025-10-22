@@ -2363,15 +2363,28 @@
         <script>
             // Carregar setup wizard quando o DOM estiver pronto
             document.addEventListener('DOMContentLoaded', () => {
-                // Carregar HTML do setup wizard
-                fetch('setup-wizard.html')
-                    .then(response => response.text())
-                    .then(html => {
-                        document.getElementById('setup-wizard-container').innerHTML = html;
-                        // Inicializar setup wizard após carregar o HTML
-                        setTimeout(initSetupWizard, 100);
-                    })
-                    .catch(error => console.error('Erro ao carregar setup wizard:', error));
+                // Verificar se é um novo usuário ANTES de carregar o HTML
+                const userConfig = localStorage.getItem('userConfig');
+                const setupCompleto = localStorage.getItem('setupCompleto');
+
+                console.log('🔍 Verificando novo usuário:');
+                console.log('   userConfig:', userConfig ? 'SIM' : 'NÃO');
+                console.log('   setupCompleto:', setupCompleto ? 'SIM' : 'NÃO');
+
+                // Carregar setup wizard APENAS se for novo usuário
+                if (!userConfig && !setupCompleto) {
+                    console.log('✅ Novo usuário detectado - Carregando setup wizard');
+                    fetch('setup-wizard.html')
+                        .then(response => response.text())
+                        .then(html => {
+                            document.getElementById('setup-wizard-container').innerHTML = html;
+                            // Inicializar setup wizard após carregar o HTML
+                            setTimeout(initSetupWizard, 100);
+                        })
+                        .catch(error => console.error('Erro ao carregar setup wizard:', error));
+                } else {
+                    console.log('⏭️  Usuário já ativo - Setup wizard não será carregado');
+                }
             });
         </script>
     </body>
