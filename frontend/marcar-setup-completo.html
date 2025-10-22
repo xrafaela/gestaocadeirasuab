@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcar Setup Como Completo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .status {
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 5px solid;
+        }
+        .status.new {
+            background: #fff3cd;
+            border-color: #ffc107;
+        }
+        .status.active {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        button.danger {
+            background: #dc3545;
+        }
+        button.danger:hover {
+            background: #c82333;
+        }
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        .info {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Ferramenta de Debug - Setup Wizard</h1>
+        <p>Use esta página para verificar e corrigir o status do setup wizard.</p>
+        
+        <div id="status-display"></div>
+        
+        <div class="info">
+            <h3>📋 Instruções:</h3>
+            <ol>
+                <li>Clique em <strong>"Verificar Status"</strong> para ver o estado atual</li>
+                <li>Se o setup wizard continua aparecendo, clique em <strong>"Marcar Setup Como Completo"</strong></li>
+                <li>Recarregue a página principal (F5) para aplicar as mudanças</li>
+            </ol>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <button onclick="checkStatus()">🔍 Verificar Status</button>
+            <button onclick="markComplete()">✅ Marcar Setup Como Completo</button>
+            <button onclick="resetSetup()" class="danger">🔄 Resetar Setup (Novo Usuário)</button>
+        </div>
+        
+        <div id="data-display" style="margin-top: 30px;"></div>
+    </div>
+
+    <script>
+        function checkStatus() {
+            const userConfig = localStorage.getItem('userConfig');
+            const setupCompleto = localStorage.getItem('setupCompleto');
+            
+            const isNew = !userConfig && !setupCompleto;
+            
+            let html = '<div class="status ' + (isNew ? 'new' : 'active') + '">';
+            html += '<h2>' + (isNew ? '🆕 Novo Usuário' : '✅ Usuário Ativo') + '</h2>';
+            html += '<p><strong>userConfig:</strong> ' + (userConfig ? '✅ EXISTE' : '❌ NÃO EXISTE') + '</p>';
+            html += '<p><strong>setupCompleto:</strong> ' + (setupCompleto ? '✅ EXISTE' : '❌ NÃO EXISTE') + '</p>';
+            html += '</div>';
+            
+            document.getElementById('status-display').innerHTML = html;
+            
+            if (userConfig || setupCompleto) {
+                let dataHtml = '<h3>📊 Dados Salvos:</h3>';
+                if (userConfig) {
+                    dataHtml += '<h4>userConfig:</h4>';
+                    dataHtml += '<pre>' + JSON.stringify(JSON.parse(userConfig), null, 2) + '</pre>';
+                }
+                if (setupCompleto) {
+                    dataHtml += '<h4>setupCompleto:</h4>';
+                    dataHtml += '<pre>' + setupCompleto + '</pre>';
+                }
+                document.getElementById('data-display').innerHTML = dataHtml;
+            } else {
+                document.getElementById('data-display').innerHTML = '';
+            }
+        }
+        
+        function markComplete() {
+            const config = {
+                nome: 'Igor Costas',
+                curso: 'LEI - Licenciatura em Engenharia Informática',
+                ano: '1',
+                disciplinas: ['AC', 'FBD', 'LC', 'PO', 'SC', 'EPE'],
+                horasDia: 4,
+                diasEstudo: ['segunda', 'terca', 'quarta', 'quinta', 'sexta'],
+                dataSetup: new Date().toISOString()
+            };
+            
+            localStorage.setItem('userConfig', JSON.stringify(config));
+            localStorage.setItem('setupCompleto', 'true');
+            
+            alert('✅ Setup marcado como completo!\n\n🔄 Agora recarregue a página principal (index.html) com F5');
+            checkStatus();
+        }
+        
+        function resetSetup() {
+            if (confirm('⚠️ Tem certeza que deseja resetar o setup?\n\nIsso fará o setup wizard aparecer novamente.')) {
+                localStorage.removeItem('userConfig');
+                localStorage.removeItem('setupCompleto');
+                alert('🔄 Setup resetado!\n\nO setup wizard aparecerá na próxima vez que abrir a página principal.');
+                checkStatus();
+            }
+        }
+        
+        // Verificar status automaticamente ao carregar
+        window.onload = checkStatus;
+    </script>
+</body>
+</html>
+

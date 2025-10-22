@@ -180,43 +180,49 @@ FRONTEND_URL="http://localhost:5000"
 
 echo "🌐 Abrindo aplicação no navegador..."
 echo "   URL: $FRONTEND_URL"
+echo ""
+echo "⚠️  IMPORTANTE: Se abrir múltiplas abas, feche as extras manualmente"
+echo "   Isso pode acontecer devido às configurações do seu navegador"
+echo ""
 
-# Abrir apenas uma aba com localhost (sem background)
-BROWSER_OPENED=false
+# Criar arquivo temporário para controlar abertura
+LOCK_FILE="/tmp/study-planner-browser.lock"
 
-# Tentar firefox primeiro (mais confiável)
-if command -v firefox > /dev/null && [ "$BROWSER_OPENED" = false ]; then
-    firefox "$FRONTEND_URL" > /dev/null 2>&1 &
-    BROWSER_OPENED=true
-    sleep 2
+# Verificar se já foi aberto recentemente (últimos 5 segundos)
+if [ -f "$LOCK_FILE" ]; then
+    LOCK_TIME=$(stat -c %Y "$LOCK_FILE" 2>/dev/null || echo 0)
+    CURRENT_TIME=$(date +%s)
+    TIME_DIFF=$((CURRENT_TIME - LOCK_TIME))
+
+    if [ $TIME_DIFF -lt 5 ]; then
+        echo "⏭️  Navegador já foi aberto recentemente, pulando..."
+        exit 0
+    fi
 fi
 
-# Se firefox não funcionou, tentar google-chrome
-if [ "$BROWSER_OPENED" = false ] && command -v google-chrome > /dev/null; then
-    google-chrome "$FRONTEND_URL" > /dev/null 2>&1 &
-    BROWSER_OPENED=true
-    sleep 2
-fi
+# Criar lock file
+touch "$LOCK_FILE"
 
-# Se ainda não abriu, tentar chromium
-if [ "$BROWSER_OPENED" = false ] && command -v chromium-browser > /dev/null; then
-    chromium-browser "$FRONTEND_URL" > /dev/null 2>&1 &
-    BROWSER_OPENED=true
-    sleep 2
-fi
-
-# Se ainda não abriu, tentar xdg-open (último recurso)
-if [ "$BROWSER_OPENED" = false ] && command -v xdg-open > /dev/null; then
+# Tentar abrir navegador (apenas um comando será executado)
+if command -v firefox > /dev/null; then
+    echo "   Usando Firefox..."
+    firefox --new-tab "$FRONTEND_URL" > /dev/null 2>&1 &
+elif command -v google-chrome > /dev/null; then
+    echo "   Usando Google Chrome..."
+    google-chrome --new-tab "$FRONTEND_URL" > /dev/null 2>&1 &
+elif command -v chromium-browser > /dev/null; then
+    echo "   Usando Chromium..."
+    chromium-browser --new-tab "$FRONTEND_URL" > /dev/null 2>&1 &
+elif command -v xdg-open > /dev/null; then
+    echo "   Usando xdg-open..."
     xdg-open "$FRONTEND_URL" > /dev/null 2>&1 &
-    BROWSER_OPENED=true
-    sleep 2
-fi
-
-# Se nenhum navegador foi aberto
-if [ "$BROWSER_OPENED" = false ]; then
+else
     echo "⚠️  Navegador não detectado automaticamente"
     echo "   Abra manualmente: $FRONTEND_URL"
+    rm -f "$LOCK_FILE"
 fi
+
+sleep 2
 
 # Informações finais
 echo ""

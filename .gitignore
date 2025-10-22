@@ -86,3 +86,10 @@ data/moodle/.cache/
 
 # AI cache
 data/ai/.cache/
+
+# Process ID files
+.backend.pid
+*.pid
+
+# Lock files
+/tmp/study-planner-browser.lock

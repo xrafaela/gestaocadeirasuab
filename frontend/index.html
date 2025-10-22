@@ -2361,8 +2361,8 @@
         <!-- Setup Wizard Scripts -->
         <script src="setup-wizard.js"></script>
         <script>
-            // Função para verificar se é novo usuário
-            function isNewUser() {
+            // Função para verificar se é novo usuário (verifica dados reais do sistema)
+            async function isNewUser() {
                 const userConfig = localStorage.getItem('userConfig');
                 const setupCompleto = localStorage.getItem('setupCompleto');
 
@@ -2370,17 +2370,53 @@
                 console.log('   localStorage.userConfig:', userConfig ? 'EXISTE' : 'NÃO EXISTE');
                 console.log('   localStorage.setupCompleto:', setupCompleto ? 'EXISTE' : 'NÃO EXISTE');
 
-                // É novo usuário se AMBOS não existirem
-                const isNew = !userConfig && !setupCompleto;
-                console.log('   Resultado:', isNew ? '🆕 NOVO USUÁRIO' : '✅ USUÁRIO ATIVO');
+                // Se já tem userConfig ou setupCompleto, não é novo usuário
+                if (userConfig || setupCompleto) {
+                    console.log('   ✅ USUÁRIO ATIVO (localStorage)');
+                    return false;
+                }
 
-                return isNew;
+                // Verificar se há dados reais no sistema (pomodoros, disciplinas)
+                try {
+                    console.log('   🔍 Verificando dados no servidor...');
+
+                    // Verificar se há sessões de pomodoro
+                    const sessoesResponse = await fetch('http://localhost:5000/api/sessoes');
+                    const sessoes = await sessoesResponse.json();
+
+                    if (sessoes && sessoes.length > 0) {
+                        console.log('   ✅ USUÁRIO ATIVO (tem', sessoes.length, 'sessões de pomodoro)');
+                        // Marcar setup como completo automaticamente
+                        localStorage.setItem('setupCompleto', 'true');
+                        return false;
+                    }
+
+                    // Verificar se há disciplinas configuradas
+                    const disciplinasResponse = await fetch('http://localhost:5000/api/disciplinas');
+                    const disciplinas = await disciplinasResponse.json();
+
+                    if (disciplinas && disciplinas.length > 0) {
+                        console.log('   ✅ USUÁRIO ATIVO (tem', disciplinas.length, 'disciplinas)');
+                        // Marcar setup como completo automaticamente
+                        localStorage.setItem('setupCompleto', 'true');
+                        return false;
+                    }
+
+                    console.log('   🆕 NOVO USUÁRIO (sem dados no sistema)');
+                    return true;
+                } catch (error) {
+                    console.error('   ⚠️ Erro ao verificar dados:', error);
+                    // Em caso de erro, assumir que não é novo usuário (mais seguro)
+                    return false;
+                }
             }
 
             // Carregar setup wizard quando o DOM estiver pronto
-            document.addEventListener('DOMContentLoaded', () => {
+            document.addEventListener('DOMContentLoaded', async () => {
                 // Verificar se é um novo usuário ANTES de carregar o HTML
-                if (isNewUser()) {
+                const isNew = await isNewUser();
+
+                if (isNew) {
                     console.log('📥 Carregando setup wizard para novo usuário...');
                     fetch('setup-wizard.html')
                         .then(response => response.text())
