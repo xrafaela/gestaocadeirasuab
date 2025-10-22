@@ -1,0 +1,377 @@
+<!-- Página: Moodle -->
+<div id="page-moodle" class="page">
+    <div class="page-header">
+        <h1><i class="fas fa-university"></i> Portal Moodle UAB</h1>
+        <p class="subtitle">Integração completa com o Moodle da UAB</p>
+    </div>
+
+    <!-- Área de Login -->
+    <div id="moodle-login-area" class="moodle-section">
+        <div class="login-card">
+            <h2><i class="fas fa-sign-in-alt"></i> Conectar ao Moodle</h2>
+            <p>Faça login para sincronizar seus dados do Moodle</p>
+            <form id="moodle-login-form">
+                <div class="form-group">
+                    <label>Nome de Usuário</label>
+                    <input type="text" id="moodle-username" required placeholder="Seu usuário do Moodle">
+                </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" id="moodle-password" required placeholder="Sua senha">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fas fa-sign-in-alt"></i> Conectar
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Área Principal do Moodle (oculta até login) -->
+    <div id="moodle-main-area" style="display: none;">
+        <!-- Status da Sincronização -->
+        <div class="sync-status-card">
+            <div class="sync-header">
+                <h3><i class="fas fa-sync"></i> Status da Sincronização</h3>
+                <button class="btn btn-sm btn-primary" id="btn-sync-all">
+                    <i class="fas fa-sync-alt"></i> Sincronizar Tudo
+                </button>
+            </div>
+            <div class="sync-stats">
+                <div class="sync-stat">
+                    <i class="fas fa-book"></i>
+                    <span id="sync-courses-count">0</span>
+                    <small>Disciplinas</small>
+                </div>
+                <div class="sync-stat">
+                    <i class="fas fa-tasks"></i>
+                    <span id="sync-tasks-count">0</span>
+                    <small>Tarefas</small>
+                </div>
+                <div class="sync-stat">
+                    <i class="fas fa-file-pdf"></i>
+                    <span id="sync-materials-count">0</span>
+                    <small>Materiais</small>
+                </div>
+                <div class="sync-stat">
+                    <i class="fas fa-bell"></i>
+                    <span id="sync-notifications-count">0</span>
+                    <small>Notificações</small>
+                </div>
+            </div>
+            <div class="sync-time">
+                <small>Última sincronização: <span id="last-sync-time">Nunca</span></small>
+            </div>
+        </div>
+
+        <!-- Notificações em Tempo Real -->
+        <div id="moodle-notifications" class="moodle-section">
+            <h3><i class="fas fa-bell"></i> Notificações</h3>
+            <div id="notifications-list" class="notifications-container">
+                <!-- Preenchido dinamicamente -->
+            </div>
+        </div>
+
+        <!-- Materiais Novos -->
+        <div id="moodle-new-materials" class="moodle-section">
+            <h3><i class="fas fa-file-alt"></i> Materiais Novos (Hoje)</h3>
+            <div id="new-materials-list" class="materials-grid">
+                <!-- Preenchido dinamicamente -->
+            </div>
+        </div>
+
+        <!-- Tabs de Navegação -->
+        <div class="moodle-tabs">
+            <button class="tab-btn active" data-tab="courses">
+                <i class="fas fa-book"></i> Disciplinas
+            </button>
+            <button class="tab-btn" data-tab="assignments">
+                <i class="fas fa-clipboard-list"></i> Tarefas
+            </button>
+            <button class="tab-btn" data-tab="forums">
+                <i class="fas fa-comments"></i> Fóruns
+            </button>
+            <button class="tab-btn" data-tab="grades">
+                <i class="fas fa-graduation-cap"></i> Notas
+            </button>
+            <button class="tab-btn" data-tab="calendar">
+                <i class="fas fa-calendar"></i> Calendário
+            </button>
+        </div>
+
+        <!-- Tab: Disciplinas -->
+        <div id="tab-courses" class="tab-content active">
+            <div id="moodle-courses-list" class="courses-grid">
+                <!-- Preenchido dinamicamente -->
+            </div>
+        </div>
+
+        <!-- Tab: Tarefas -->
+        <div id="tab-assignments" class="tab-content">
+            <div class="assignments-filters">
+                <button class="filter-btn active" data-filter="all">Todas</button>
+                <button class="filter-btn" data-filter="pending">Pendentes</button>
+                <button class="filter-btn" data-filter="overdue">Atrasadas</button>
+            </div>
+            <div id="moodle-assignments-list" class="assignments-list">
+                <!-- Preenchido dinamicamente -->
+            </div>
+        </div>
+
+        <!-- Tab: Fóruns -->
+        <div id="tab-forums" class="tab-content">
+            <div id="moodle-forums-list" class="forums-list">
+                <!-- Preenchido dinamicamente -->
+            </div>
+        </div>
+
+        <!-- Tab: Notas -->
+        <div id="tab-grades" class="tab-content">
+            <div id="moodle-grades-list" class="grades-container">
+                <!-- Preenchido dinamicamente -->
+            </div>
+        </div>
+
+        <!-- Tab: Calendário -->
+        <div id="tab-calendar" class="tab-content">
+            <div id="moodle-calendar" class="calendar-events">
+                <!-- Preenchido dinamicamente -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Página: IA Chat -->
+<div id="page-ia" class="page">
+    <div class="page-header">
+        <h1><i class="fas fa-robot"></i> Assistente IA</h1>
+        <p class="subtitle">Seu tutor pessoal com inteligência artificial</p>
+    </div>
+
+    <!-- Verificação de Status da IA -->
+    <div id="ia-status-check" class="ia-status-card">
+        <div class="status-icon">
+            <i class="fas fa-robot"></i>
+        </div>
+        <h3>Configurando Assistente IA...</h3>
+        <p id="ia-status-message">Verificando disponibilidade...</p>
+    </div>
+
+    <!-- Área Principal da IA -->
+    <div id="ia-main-area" style="display: none;">
+        <!-- Tabs de Funcionalidades -->
+        <div class="ia-tabs">
+            <button class="ia-tab-btn active" data-ia-tab="chat">
+                <i class="fas fa-comments"></i> Chat
+            </button>
+            <button class="ia-tab-btn" data-ia-tab="summarize">
+                <i class="fas fa-file-pdf"></i> Resumir PDF
+            </button>
+            <button class="ia-tab-btn" data-ia-tab="explain">
+                <i class="fas fa-lightbulb"></i> Explicar
+            </button>
+            <button class="ia-tab-btn" data-ia-tab="flashcards">
+                <i class="fas fa-layer-group"></i> Flashcards
+            </button>
+            <button class="ia-tab-btn" data-ia-tab="study-plan">
+                <i class="fas fa-calendar-check"></i> Plano de Estudos
+            </button>
+        </div>
+
+        <!-- Tab: Chat -->
+        <div id="ia-tab-chat" class="ia-tab-content active">
+            <div class="chat-container">
+                <div class="chat-messages" id="chat-messages">
+                    <div class="chat-message bot">
+                        <div class="message-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            <p>Olá! Sou seu assistente de estudos com IA. Como posso ajudá-lo hoje?</p>
+                            <small class="message-time">Agora</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <div class="context-selector">
+                        <select id="chat-context-discipline">
+                            <option value="">Contexto geral</option>
+                            <!-- Preenchido com disciplinas -->
+                        </select>
+                    </div>
+                    <div class="chat-input-wrapper">
+                        <textarea id="chat-input" placeholder="Digite sua pergunta..." rows="2"></textarea>
+                        <button id="btn-send-chat" class="btn-send">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="chat-suggestions">
+                        <button class="suggestion-chip" data-suggestion="Explique programação orientada a objetos">
+                            💡 Explique POO
+                        </button>
+                        <button class="suggestion-chip" data-suggestion="Quais são os conceitos principais desta semana?">
+                            📚 Conceitos da semana
+                        </button>
+                        <button class="suggestion-chip" data-suggestion="Como devo organizar meu estudo hoje?">
+                            ⏰ Organizar estudo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Resumir PDF -->
+        <div id="ia-tab-summarize" class="ia-tab-content">
+            <div class="ia-tool-card">
+                <h3><i class="fas fa-file-pdf"></i> Resumir PDF Automaticamente</h3>
+                <p>Carregue um PDF e receba um resumo automático do conteúdo</p>
+
+                <div class="form-group">
+                    <label>Selecionar PDF</label>
+                    <input type="file" id="pdf-file-input" accept=".pdf">
+                </div>
+
+                <div class="form-group">
+                    <label>Estilo do Resumo</label>
+                    <select id="summary-style">
+                        <option value="conciso">Conciso (resumo breve)</option>
+                        <option value="detalhado">Detalhado (mais informações)</option>
+                        <option value="topicos">Tópicos (lista de conceitos)</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary btn-block" id="btn-summarize-pdf">
+                    <i class="fas fa-magic"></i> Gerar Resumo
+                </button>
+
+                <div id="summary-result" class="result-area" style="display: none;">
+                    <h4>Resumo Gerado:</h4>
+                    <div class="summary-content" id="summary-content"></div>
+                    <div class="result-actions">
+                        <button class="btn btn-secondary" id="btn-copy-summary">
+                            <i class="fas fa-copy"></i> Copiar
+                        </button>
+                        <button class="btn btn-secondary" id="btn-download-summary">
+                            <i class="fas fa-download"></i> Baixar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Explicar -->
+        <div id="ia-tab-explain" class="ia-tab-content">
+            <div class="ia-tool-card">
+                <h3><i class="fas fa-lightbulb"></i> Explique Este Conceito</h3>
+                <p>Peça uma explicação detalhada de qualquer conceito</p>
+
+                <div class="form-group">
+                    <label>Conceito</label>
+                    <input type="text" id="concept-input" placeholder="Ex: Herança em POO, Arrays, Algoritmos...">
+                </div>
+
+                <div class="form-group">
+                    <label>Nível de Explicação</label>
+                    <select id="explanation-level">
+                        <option value="basico">Básico (iniciante)</option>
+                        <option value="intermediario" selected>Intermediário</option>
+                        <option value="avancado">Avançado</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary btn-block" id="btn-explain-concept">
+                    <i class="fas fa-magic"></i> Explicar
+                </button>
+
+                <div id="explanation-result" class="result-area" style="display: none;">
+                    <h4>Explicação:</h4>
+                    <div class="explanation-content" id="explanation-content"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Flashcards -->
+        <div id="ia-tab-flashcards" class="ia-tab-content">
+            <div class="ia-tool-card">
+                <h3><i class="fas fa-layer-group"></i> Criar Flashcards de PDF</h3>
+                <p>Gere flashcards automaticamente a partir de um PDF</p>
+
+                <div class="form-group">
+                    <label>Selecionar PDF</label>
+                    <input type="file" id="flashcards-pdf-input" accept=".pdf">
+                </div>
+
+                <div class="form-group">
+                    <label>Número de Flashcards</label>
+                    <input type="number" id="num-flashcards" value="10" min="5" max="20">
+                </div>
+
+                <button class="btn btn-primary btn-block" id="btn-create-flashcards">
+                    <i class="fas fa-magic"></i> Criar Flashcards
+                </button>
+
+                <div id="flashcards-result" class="flashcards-container" style="display: none;">
+                    <h4>Flashcards Gerados:</h4>
+                    <div id="flashcards-list" class="flashcards-list">
+                        <!-- Preenchido dinamicamente -->
+                    </div>
+                    <div class="flashcard-controls">
+                        <button class="btn btn-secondary" id="btn-prev-flashcard">
+                            <i class="fas fa-chevron-left"></i> Anterior
+                        </button>
+                        <span id="flashcard-counter">1 / 10</span>
+                        <button class="btn btn-secondary" id="btn-next-flashcard">
+                            Próximo <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Plano de Estudos -->
+        <div id="ia-tab-study-plan" class="ia-tab-content">
+            <div class="ia-tool-card">
+                <h3><i class="fas fa-calendar-check"></i> Sugerir Plano de Estudos</h3>
+                <p>Receba um plano de estudos personalizado com IA</p>
+
+                <div class="form-group">
+                    <label>Disciplinas a incluir</label>
+                    <div id="study-plan-disciplines" class="checkbox-group">
+                        <!-- Preenchido com disciplinas -->
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Período (semanas)</label>
+                    <input type="number" id="study-plan-weeks" value="4" min="1" max="12">
+                </div>
+
+                <button class="btn btn-primary btn-block" id="btn-create-study-plan">
+                    <i class="fas fa-magic"></i> Gerar Plano
+                </button>
+
+                <div id="study-plan-result" class="result-area" style="display: none;">
+                    <h4>Seu Plano de Estudos:</h4>
+                    <div class="study-plan-content" id="study-plan-content"></div>
+                    <button class="btn btn-secondary" id="btn-apply-study-plan">
+                        <i class="fas fa-check"></i> Aplicar ao Calendário
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Área de Erro/Configuração -->
+    <div id="ia-config-area" style="display: none;">
+        <div class="config-card">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Assistente IA não Configurado</h3>
+            <p>Para usar o assistente de IA, você precisa configurar sua chave API da OpenAI.</p>
+            <ol>
+                <li>Obtenha sua chave em: <a href="https://platform.openai.com/api-keys" target="_blank">OpenAI API Keys</a></li>
+                <li>Configure a variável de ambiente: <code>export OPENAI_API_KEY='sua-chave'</code></li>
+                <li>Reinicie o servidor</li>
+            </ol>
+            <p><strong>Nota:</strong> O uso da API da OpenAI pode ter custos associados.</p>
+        </div>
+    </div>
+</div>
