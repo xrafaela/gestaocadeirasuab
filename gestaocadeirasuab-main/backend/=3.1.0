@@ -1,0 +1,23 @@
+Collecting Flask==3.1.0
+  Using cached flask-3.1.0-py3-none-any.whl.metadata (2.7 kB)
+Requirement already satisfied: Werkzeug in ./.venv/lib/python3.13/site-packages (3.1.3)
+Collecting Flask-CORS==4.0.1
+  Using cached Flask_Cors-4.0.1-py2.py3-none-any.whl.metadata (5.5 kB)
+Requirement already satisfied: Jinja2>=3.1.2 in ./.venv/lib/python3.13/site-packages (from Flask==3.1.0) (3.1.6)
+Requirement already satisfied: itsdangerous>=2.2 in ./.venv/lib/python3.13/site-packages (from Flask==3.1.0) (2.2.0)
+Requirement already satisfied: click>=8.1.3 in ./.venv/lib/python3.13/site-packages (from Flask==3.1.0) (8.3.0)
+Requirement already satisfied: blinker>=1.9 in ./.venv/lib/python3.13/site-packages (from Flask==3.1.0) (1.9.0)
+Requirement already satisfied: MarkupSafe>=2.1.1 in ./.venv/lib/python3.13/site-packages (from Werkzeug) (3.0.3)
+Downloading flask-3.1.0-py3-none-any.whl (102 kB)
+Downloading Flask_Cors-4.0.1-py2.py3-none-any.whl (14 kB)
+Installing collected packages: Flask, Flask-CORS
+  Attempting uninstall: Flask
+    Found existing installation: Flask 3.1.2
+    Uninstalling Flask-3.1.2:
+      Successfully uninstalled Flask-3.1.2
+  Attempting uninstall: Flask-CORS
+    Found existing installation: flask-cors 6.0.1
+    Uninstalling flask-cors-6.0.1:
+      Successfully uninstalled flask-cors-6.0.1
+
+Successfully installed Flask-3.1.0 Flask-CORS-4.0.1

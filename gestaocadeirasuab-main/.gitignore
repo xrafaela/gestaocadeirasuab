@@ -1,0 +1,102 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.project
+.pydevproject
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+
+# Logs
+*.log
+logs/
+backend.log
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+.directory
+
+# Temporary files
+*.tmp
+*.bak
+*.backup
+*~
+.~*
+
+# Node (if using npm)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Cache
+.cache/
+*.cache
+
+# Backup files
+*.backup
+*.bak
+*.old
+
+# PID files
+.backend.pid
+.pid
+
+# Test coverage
+.coverage
+htmlcov/
+
+# Moodle materials (local sync)
+data/moodle/materials/
+data/ai/
+
+# User data
+data/estudos.db
+data/disciplinas.json.bak
+

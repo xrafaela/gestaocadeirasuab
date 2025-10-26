@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⏱️ Timer Pomodoro - Study Planner</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='70' font-size='70'>⏱️</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --success-color: #48bb78;
+            --success-dark: #38a169;
+            --warning-color: #f6ad55;
+            --danger-color: #fc8181;
+            --bg-dark: rgba(0, 0, 0, 0.1);
+            --bg-light: rgba(255, 255, 255, 0.2);
+            --shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: movePattern 20s linear infinite;
+        }
+
+        @keyframes movePattern {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(20px, 20px); }
+        }
+
+        .container {
+            background: var(--bg-dark);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--bg-light);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .timer-display {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .timer-value {
+            font-size: 4.5rem;
+            font-weight: bold;
+            line-height: 1;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            letter-spacing: 2px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .timer-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .time-info {
+            background: var(--bg-light);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .time-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 8px 0;
+        }
+
+        .time-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+
+        .time-value {
+            font-size: 1.1rem;
+            font-weight: bold;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .progress-container {
+            margin: 25px 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 35px;
+            background: var(--bg-dark);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success-color), var(--success-dark));
+            border-radius: 20px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(72, 187, 120, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+        }
+
+        .progress-fill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0.3) 50%,
+                rgba(255,255,255,0) 100%);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .progress-text {
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px;
+            background: var(--bg-light);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn.primary {
+            background: linear-gradient(135deg, var(--success-color), var(--success-dark));
+            border-color: var(--success-dark);
+        }
+
+        .btn.primary:hover {
+            background: linear-gradient(135deg, var(--success-dark), var(--success-color));
+        }
+
+        .btn.danger {
+            background: linear-gradient(135deg, var(--danger-color), #e53e3e);
+            border-color: #e53e3e;
+        }
+
+        .btn.warning {
+            background: linear-gradient(135deg, var(--warning-color), #dd6b20);
+            border-color: #dd6b20;
+        }
+
+        .status {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background: var(--bg-light);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .status-icon {
+            display: inline-block;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .mini-mode {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: var(--bg-light);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .mini-mode:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .disciplina-info {
+            background: var(--bg-light);
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .disciplina-info strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Animação de conclusão */
+        @keyframes celebrate {
+            0% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.1) rotate(5deg); }
+            50% { transform: scale(1) rotate(-5deg); }
+            75% { transform: scale(1.1) rotate(5deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .celebrating {
+            animation: celebrate 0.5s ease-in-out;
+        }
+
+        /* Modo compacto para telas pequenas */
+        @media (max-height: 600px) {
+            .container {
+                padding: 20px;
+            }
+            .timer-value {
+                font-size: 3.5rem;
+            }
+            .timer-display {
+                margin: 20px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mini-mode" onclick="toggleMiniMode()" title="Alternar modo compacto">
+        ⬜ Modo Compacto
+    </div>
+
+    <div class="container" id="mainContainer">
+        <div class="header">
+            <h1>⏱️ Timer Pomodoro</h1>
+            <div class="subtitle" id="sessionType">Sessão de Estudo</div>
+        </div>
+
+        <div class="timer-display">
+            <div class="timer-value" id="timerDisplay">25:00</div>
+            <div class="timer-label" id="timerLabel">Pronto para começar</div>
+        </div>
+
+        <div class="time-info">
+            <div class="time-row">
+                <span class="time-label">🕐 Início:</span>
+                <span class="time-value" id="startTime">--:--</span>
+            </div>
+            <div class="time-row">
+                <span class="time-label">🏁 Fim previsto:</span>
+                <span class="time-value" id="endTime">--:--</span>
+            </div>
+            <div class="time-row">
+                <span class="time-label">⏱️ Tempo decorrido:</span>
+                <span class="time-value" id="elapsedTime">00:00</span>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-label">
+                <span>Progresso</span>
+                <span id="progressPercent">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 0%">
+                    <span class="progress-text" id="progressText"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn primary" id="startBtn" onclick="handleStart()">
+                ▶️ Iniciar
+            </button>
+            <button class="btn warning" id="pauseBtn" onclick="handlePause()" style="display: none;">
+                ⏸️ Pausar
+            </button>
+            <button class="btn danger" id="resetBtn" onclick="handleReset()">
+                🔄 Reset
+            </button>
+        </div>
+
+        <div class="status" id="status">
+            <span class="status-icon">⏱️</span>
+            <span id="statusText">Pronto para iniciar</span>
+        </div>
+
+        <div class="disciplina-info" id="disciplinaInfo" style="display: none;">
+            <strong id="disciplinaNome">--</strong>
+            <span id="topicoNome">--</span>
+        </div>
+    </div>
+
+    <script>
+        // Estado do timer
+        let timerState = {
+            totalSeconds: 1500, // 25 minutos
+            currentSeconds: 1500,
+            isRunning: false,
+            isPaused: false,
+            type: 'study', // 'study' ou 'break'
+            startTimestamp: null,
+            pausedAt: null,
+            interval: null
+        };
+
+        // Comunicação com a janela principal
+        function syncWithParent() {
+            if (window.opener && !window.opener.closed) {
+                try {
+                    const parentState = window.opener.currentState;
+                    if (parentState && parentState.timer) {
+                        timerState = { ...parentState.timer };
+                        updateDisplay();
+                        updateControls();
+                    }
+                } catch (e) {
+                    console.log('Rodando independente da janela principal');
+                }
+            }
+        }
+
+        // Inicializar sincronização
+        setInterval(syncWithParent, 100);
+
+        function handleStart() {
+            if (window.opener && !window.opener.closed) {
+                try {
+                    window.opener.startTimer();
+                    return;
+                } catch (e) {}
+            }
+
+            // Modo standalone
+            startTimerLocal();
+        }
+
+        function handlePause() {
+            if (window.opener && !window.opener.closed) {
+                try {
+                    window.opener.pauseTimer();
+                    return;
+                } catch (e) {}
+            }
+
+            // Modo standalone
+            pauseTimerLocal();
+        }
+
+        function handleReset() {
+            if (window.opener && !window.opener.closed) {
+                try {
+                    window.opener.resetTimer();
+                    return;
+                } catch (e) {}
+            }
+
+            // Modo standalone
+            resetTimerLocal();
+        }
+
+        function startTimerLocal() {
+            if (timerState.isRunning) return;
+
+            timerState.isRunning = true;
+            timerState.isPaused = false;
+
+            if (timerState.pausedAt !== null) {
+                timerState.startTimestamp = Date.now() -
+                    (timerState.totalSeconds - timerState.pausedAt) * 1000;
+                timerState.pausedAt = null;
+            } else {
+                timerState.startTimestamp = Date.now();
+
+                // Definir horários
+                const now = new Date();
+                const end = new Date(now.getTime() + timerState.totalSeconds * 1000);
+
+                document.getElementById('startTime').textContent =
+                    now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+                document.getElementById('endTime').textContent =
+                    end.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            }
+
+            updateControls();
+
+            timerState.interval = setInterval(() => {
+                const elapsed = Math.floor((Date.now() - timerState.startTimestamp) / 1000);
+                const remaining = timerState.totalSeconds - elapsed;
+
+                if (remaining > 0) {
+                    timerState.currentSeconds = remaining;
+                    updateDisplay();
+                } else {
+                    timerState.currentSeconds = 0;
+                    updateDisplay();
+                    timerComplete();
+                }
+            }, 100);
+        }
+
+        function pauseTimerLocal() {
+            if (!timerState.isRunning) return;
+
+            timerState.isRunning = false;
+            timerState.isPaused = true;
+
+            if (timerState.startTimestamp) {
+                const elapsed = Math.floor((Date.now() - timerState.startTimestamp) / 1000);
+                timerState.pausedAt = Math.max(0, timerState.totalSeconds - elapsed);
+                timerState.currentSeconds = timerState.pausedAt;
+            }
+
+            clearInterval(timerState.interval);
+            updateControls();
+            updateDisplay();
+        }
+
+        function resetTimerLocal() {
+            pauseTimerLocal();
+
+            timerState.currentSeconds = timerState.totalSeconds;
+            timerState.isPaused = false;
+            timerState.startTimestamp = null;
+            timerState.pausedAt = null;
+
+            document.getElementById('startTime').textContent = '--:--';
+            document.getElementById('endTime').textContent = '--:--';
+            document.getElementById('elapsedTime').textContent = '00:00';
+
+            updateDisplay();
+            updateControls();
+        }
+
+        function timerComplete() {
+            clearInterval(timerState.interval);
+            timerState.isRunning = false;
+
+            // Animação de celebração
+            document.getElementById('mainContainer').classList.add('celebrating');
+            setTimeout(() => {
+                document.getElementById('mainContainer').classList.remove('celebrating');
+            }, 500);
+
+            // Notificação
+            if ('Notification' in window && Notification.permission === 'granted') {
+                const title = timerState.type === 'study' ?
+                    '🎉 Pomodoro Completo!' : '✅ Pausa Terminada!';
+                const body = timerState.type === 'study' ?
+                    'Hora de fazer uma pausa!' : 'Vamos voltar ao estudo!';
+
+                new Notification(title, {
+                    body: body,
+                    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="70" font-size="70">⏱️</text></svg>',
+                    vibrate: [200, 100, 200]
+                });
+            }
+
+            // Som de notificação
+            playSound();
+
+            // Alternar entre estudo e pausa
+            if (timerState.type === 'study') {
+                timerState.type = 'break';
+                timerState.totalSeconds = 300; // 5 minutos
+                document.getElementById('sessionType').textContent = 'Pausa';
+            } else {
+                timerState.type = 'study';
+                timerState.totalSeconds = 1500; // 25 minutos
+                document.getElementById('sessionType').textContent = 'Sessão de Estudo';
+            }
+
+            resetTimerLocal();
+        }
+
+        function updateDisplay() {
+            const minutes = Math.floor(timerState.currentSeconds / 60);
+            const seconds = timerState.currentSeconds % 60;
+            const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            document.getElementById('timerDisplay').textContent = display;
+
+            // Atualizar título da janela
+            if (timerState.isRunning) {
+                document.title = `⏱️ ${display} - ${timerState.type === 'study' ? 'Estudo' : 'Pausa'}`;
+            } else {
+                document.title = '⏱️ Timer Pomodoro - Study Planner';
+            }
+
+            // Atualizar barra de progresso
+            const progress = ((timerState.totalSeconds - timerState.currentSeconds) / timerState.totalSeconds) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            document.getElementById('progressPercent').textContent = `${Math.round(progress)}%`;
+
+            // Atualizar tempo decorrido
+            if (timerState.startTimestamp) {
+                const elapsed = Math.floor((Date.now() - timerState.startTimestamp) / 1000);
+                const elapsedMin = Math.floor(elapsed / 60);
+                const elapsedSec = elapsed % 60;
+                document.getElementById('elapsedTime').textContent =
+                    `${elapsedMin.toString().padStart(2, '0')}:${elapsedSec.toString().padStart(2, '0')}`;
+            }
+
+            // Atualizar status
+            let statusText = 'Pronto para iniciar';
+            let statusIcon = '⏱️';
+
+            if (timerState.isRunning) {
+                statusText = timerState.type === 'study' ? '📚 Estudando...' : '☕ Descansando...';
+                statusIcon = timerState.type === 'study' ? '📚' : '☕';
+            } else if (timerState.isPaused) {
+                statusText = '⏸️ Pausado';
+                statusIcon = '⏸️';
+            }
+
+            document.getElementById('statusText').textContent = statusText;
+            document.querySelector('.status-icon').textContent = statusIcon;
+
+            // Atualizar label
+            let label = 'Pronto para começar';
+            if (timerState.isRunning) {
+                label = `${Math.round(progress)}% concluído`;
+            } else if (timerState.isPaused) {
+                label = 'Timer pausado';
+            }
+            document.getElementById('timerLabel').textContent = label;
+        }
+
+        function updateControls() {
+            const startBtn = document.getElementById('startBtn');
+            const pauseBtn = document.getElementById('pauseBtn');
+
+            if (timerState.isRunning) {
+                startBtn.style.display = 'none';
+                pauseBtn.style.display = 'flex';
+            } else {
+                startBtn.style.display = 'flex';
+                pauseBtn.style.display = 'none';
+            }
+        }
+
+        function playSound() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.5);
+        }
+
+        function toggleMiniMode() {
+            const container = document.getElementById('mainContainer');
+            if (container.style.display === 'none') {
+                container.style.display = 'block';
+                window.resizeTo(400, 650);
+            } else {
+                container.style.display = 'none';
+                window.resizeTo(200, 100);
+            }
+        }
+
+        // Solicitar permissão para notificações
+        if ('Notification' in window && Notification.permission === 'default') {
+            Notification.requestPermission();
+        }
+
+        // Manter janela sempre no topo (funciona em alguns navegadores)
+        window.addEventListener('blur', () => {
+            setTimeout(() => {
+                window.focus();
+            }, 100);
+        });
+
+        // Inicializar
+        updateDisplay();
+        updateControls();
+    </script>
+</body>
+</html>
